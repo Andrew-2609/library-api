@@ -11,6 +11,8 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import java.util.Optional;
+
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
 @ExtendWith(SpringExtension.class)
@@ -28,7 +30,7 @@ public class BookRepositoryTest {
     public void returnTrueWhenIsbnExists() {
         String isbn = "123";
 
-        Book book = Book.builder().title("My Title").author("My Author").isbn(isbn).build();
+        Book book = createNewBook(isbn);
 
         testEntityManager.persist(book);
 
@@ -45,5 +47,21 @@ public class BookRepositoryTest {
         boolean isbnExists = bookRepository.existsByIsbn(isbn);
 
         assertThat(isbnExists).isFalse();
+    }
+
+    @Test
+    @DisplayName("Must return a Book by the given id")
+    public void findBookByIdTest() {
+        Book book = createNewBook("123");
+
+        testEntityManager.persist(book);
+
+        Optional<Book> foundedBook = bookRepository.findById(book.getId());
+
+        assertThat(foundedBook.isPresent()).isTrue();
+    }
+
+    private Book createNewBook(String isbn) {
+        return Book.builder().title("My Title").author("My Author").isbn(isbn).build();
     }
 }
