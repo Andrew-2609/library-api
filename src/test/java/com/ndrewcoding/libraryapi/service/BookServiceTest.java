@@ -9,11 +9,12 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.BDDMockito;
 import org.mockito.Mockito;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+
+import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -68,6 +69,38 @@ public class BookServiceTest {
                 .hasMessage("ISBN already registered!");
 
         Mockito.verify(bookRepository, Mockito.never()).save(book);
+    }
+
+    @Test
+    @DisplayName("Must return a Book with the given id")
+    public void getByIdTest() {
+        long id = 1L;
+
+        Book book = createValidBook();
+
+        book.setId(id);
+
+        Mockito.when(bookRepository.findById(id)).thenReturn(Optional.of(book));
+
+        Optional<Book> foundedBook = bookService.getById(id);
+
+        assertThat(foundedBook.isPresent()).isTrue();
+        assertThat(foundedBook.get().getId()).isEqualTo(id);
+        assertThat(foundedBook.get().getTitle()).isEqualTo(book.getTitle());
+        assertThat(foundedBook.get().getAuthor()).isEqualTo(book.getAuthor());
+        assertThat(foundedBook.get().getIsbn()).isEqualTo(book.getIsbn());
+    }
+
+    @Test
+    @DisplayName("Must return empty when given id doesn't exist")
+    public void bookNotFoundByIdTest() {
+        long id = 1L;
+
+        Mockito.when(bookRepository.findById(id)).thenReturn(Optional.empty());
+
+        Optional<Book> searchedBook = bookService.getById(id);
+
+        assertThat(searchedBook.isPresent()).isFalse();
     }
 
     private Book createValidBook() {
