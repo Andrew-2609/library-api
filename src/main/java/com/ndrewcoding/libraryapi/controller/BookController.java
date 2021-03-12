@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import javax.validation.Valid;
 
@@ -25,6 +26,15 @@ public class BookController {
         this.modelMapper = mapper;
     }
 
+    @GetMapping("{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public BookDTO get(@PathVariable Long id) {
+        return bookService
+                .getById(id)
+                .map(book -> modelMapper.map(book, BookDTO.class))
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+    }
+
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public BookDTO create(@RequestBody @Valid BookDTO bookDTO) {
@@ -33,6 +43,31 @@ public class BookController {
         entity = bookService.save(entity);
 
         return modelMapper.map(entity, BookDTO.class);
+    }
+
+    @PutMapping("{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public BookDTO update(@PathVariable Long id, BookDTO bookDTO) {
+        return bookService
+                .getById(id)
+                .map(book -> {
+                    book.setTitle(bookDTO.getTitle());
+                    book.setAuthor(bookDTO.getAuthor());
+
+                    book = bookService.update(book);
+
+                    return modelMapper.map(book, BookDTO.class);
+                })
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+    }
+
+    @DeleteMapping("{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void delete(@PathVariable Long id) {
+        Book book = bookService
+                .getById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST));
+        bookService.delete(book);
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)

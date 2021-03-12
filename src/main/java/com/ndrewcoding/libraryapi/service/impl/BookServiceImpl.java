@@ -6,6 +6,8 @@ import com.ndrewcoding.libraryapi.model.repository.BookRepository;
 import com.ndrewcoding.libraryapi.service.BookService;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class BookServiceImpl implements BookService {
 
@@ -21,5 +23,20 @@ public class BookServiceImpl implements BookService {
             throw new BusinessException("ISBN already registered!");
         }
         return bookRepository.save(book);
+    }
+
+    @Override
+    public Optional<Book> getById(Long id) {
+        return Optional.empty();
+    }
+
+    @Override
+    public void delete(Book book) {
+
+    }
+
+    @Override
+    public Book update(Book book) {
+        return null;
     }
 }
