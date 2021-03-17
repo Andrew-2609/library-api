@@ -56,7 +56,7 @@ public class BookServiceTest {
     }
 
     @Test
-    @DisplayName("Must throw a Business Exception when trying to registrate a Book with existing ISBN")
+    @DisplayName("Must throw a Business Exception when trying to register a Book with existing ISBN")
     public void saveBookThrowsBusinessExceptionOnExistingIsbn() {
         Book book = createValidBook();
 
@@ -101,6 +101,65 @@ public class BookServiceTest {
         Optional<Book> searchedBook = bookService.getById(id);
 
         assertThat(searchedBook.isPresent()).isFalse();
+    }
+
+    @Test
+    @DisplayName("Must delete the Book with the given ID")
+    public void deleteBookTest() {
+        Book book = Book.builder().id(1L).build();
+
+        org.junit.jupiter.api.Assertions.assertDoesNotThrow(() -> bookService.delete(book));
+
+        Mockito.verify(bookRepository, Mockito.times(1)).delete(book);
+    }
+
+    @Test
+    @DisplayName("Delete must throw IllegalArgumentException when given Book is not valid")
+    public void deleteInvalidBookTest() {
+        Book book = Book.builder().build();
+
+        Throwable exception = Assertions.catchThrowable(() -> bookService.delete(book));
+
+        assertThat(exception)
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("There is no Book with this ID.");
+
+        Mockito.verify(bookRepository, Mockito.never()).delete(book);
+    }
+
+    @Test
+    @DisplayName("Must successfully update a Book with the given ID")
+    public void updateBookTest() {
+        long id = 1L;
+
+        Book originalBook = Book.builder().id(id).build();
+
+        Book updatingBook = createValidBook();
+
+        updatingBook.setId(id);
+
+        Mockito.when(bookRepository.save(originalBook)).thenReturn(updatingBook);
+
+        Book finalBook = bookService.update(originalBook);
+
+        assertThat(finalBook.getId()).isEqualTo(updatingBook.getId());
+        assertThat(finalBook.getTitle()).isEqualTo(updatingBook.getTitle());
+        assertThat(finalBook.getAuthor()).isEqualTo(updatingBook.getAuthor());
+        assertThat(finalBook.getIsbn()).isEqualTo(updatingBook.getIsbn());
+    }
+
+    @Test
+    @DisplayName("Must throw IllegalArgumentException when updating a Book with invalid ID")
+    public void updateInvalidBookTest() {
+        Book book = Book.builder().build();
+
+        Throwable exception = Assertions.catchThrowable(() -> bookService.update(book));
+
+        assertThat(exception)
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("There is no Book with this ID.");
+
+        Mockito.verify(bookRepository, Mockito.never()).save(book);
     }
 
     private Book createValidBook() {
