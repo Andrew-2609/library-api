@@ -14,6 +14,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
@@ -22,6 +25,7 @@ import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilde
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
+import java.util.Collections;
 import java.util.Optional;
 
 import static org.hamcrest.Matchers.hasSize;
@@ -204,7 +208,7 @@ public class BookControllerTest {
 
     @Test
     @DisplayName("Must delete a Book based on its Id")
-    public void deleteBookTest() throws Exception{
+    public void deleteBookTest() throws Exception {
 
         long id = 1L;
 
@@ -230,6 +234,35 @@ public class BookControllerTest {
 
         mvc.perform(request)
                 .andExpect(status().isBadRequest());
+    }
+
+    @Test
+    @DisplayName("Must filter books")
+    public void findBookTest() throws Exception {
+        Book book = Book.builder()
+                .id(1L)
+                .title(createNewBookDTO().getTitle())
+                .author(createNewBookDTO().getAuthor())
+                .isbn(createNewBookDTO().getIsbn())
+                .build();
+
+        BDDMockito
+                .given(bookService.find(Mockito.any(Book.class), Mockito.any(Pageable.class)))
+                .willReturn(new PageImpl<>(Collections.singletonList(book), PageRequest.of(0, 100), 1));
+
+        String queryString = String.format("?title=%s&author=%s&page=0&size=100",
+                book.getTitle(), book.getAuthor());
+
+        MockHttpServletRequestBuilder request = MockMvcRequestBuilders
+                .get(BOOK_API.concat(queryString))
+                .accept(MediaType.APPLICATION_JSON);
+
+        mvc.perform(request)
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("content", hasSize(1)))
+                .andExpect(jsonPath("totalElements").value(1))
+                .andExpect(jsonPath("pageable.pageNumber").value(0))
+                .andExpect(jsonPath("pageable.pageSize").value(100));
     }
 
     private BookDTO createNewBookDTO() {

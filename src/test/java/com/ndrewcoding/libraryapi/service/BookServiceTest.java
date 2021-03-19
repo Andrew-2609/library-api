@@ -9,11 +9,17 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.ArgumentMatchers;
 import org.mockito.Mockito;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -160,6 +166,35 @@ public class BookServiceTest {
                 .hasMessage("There is no Book with this ID.");
 
         Mockito.verify(bookRepository, Mockito.never()).save(book);
+    }
+
+    @Test
+    @DisplayName("Must filter Books by its properties")
+    public void findBookTest() {
+        //scenery
+        Book book = createValidBook();
+
+        int pageSize = 10;
+
+        PageRequest pageRequest = PageRequest.of(0, pageSize);
+
+        List<Book> booksList = Collections.singletonList(book);
+
+        Page<Book> page = new PageImpl<>(booksList, pageRequest, 1);
+
+        Mockito
+                .when(bookRepository
+                        .findAll(ArgumentMatchers.any(), Mockito.any(PageRequest.class)))
+                .thenReturn(page);
+
+        //execution
+        Page<Book> booksResult = bookService.find(book, pageRequest);
+
+        //verifications
+        assertThat(booksResult.getTotalElements()).isEqualTo(1);
+        assertThat(booksResult.getContent()).isEqualTo(booksList);
+        assertThat(booksResult.getPageable().getPageNumber()).isEqualTo(0);
+        assertThat(booksResult.getPageable().getPageSize()).isEqualTo(pageSize);
     }
 
     private Book createValidBook() {

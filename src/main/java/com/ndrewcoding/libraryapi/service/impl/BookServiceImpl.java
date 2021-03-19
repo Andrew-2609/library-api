@@ -4,6 +4,10 @@ import com.ndrewcoding.libraryapi.exception.BusinessException;
 import com.ndrewcoding.libraryapi.model.entity.Book;
 import com.ndrewcoding.libraryapi.model.repository.BookRepository;
 import com.ndrewcoding.libraryapi.service.BookService;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -19,7 +23,7 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public Book save(Book book) {
-        if(bookRepository.existsByIsbn(book.getIsbn())) {
+        if (bookRepository.existsByIsbn(book.getIsbn())) {
             throw new BusinessException("ISBN already registered!");
         }
         return bookRepository.save(book);
@@ -32,7 +36,7 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public void delete(Book book) {
-        if(book == null || book.getId() == null) {
+        if (book == null || book.getId() == null) {
             throw new IllegalArgumentException("There is no Book with this ID.");
         }
         bookRepository.delete(book);
@@ -40,9 +44,18 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public Book update(Book book) {
-        if(book == null || book.getId() == null) {
+        if (book == null || book.getId() == null) {
             throw new IllegalArgumentException("There is no Book with this ID.");
         }
         return bookRepository.save(book);
+    }
+
+    @Override
+    public Page<Book> find(Book filter, Pageable pageRequest) {
+        Example<Book> example = Example.of(filter, ExampleMatcher.matching()
+                .withIgnoreCase()
+                .withIgnoreNullValues()
+                .withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING));
+        return bookRepository.findAll(example, pageRequest);
     }
 }
