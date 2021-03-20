@@ -1,4 +1,4 @@
-package com.ndrewcoding.libraryapi.model.entity;
+package com.ndrewcoding.libraryapi.api.model.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

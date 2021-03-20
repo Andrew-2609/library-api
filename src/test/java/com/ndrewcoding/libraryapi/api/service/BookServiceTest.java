@@ -1,9 +1,9 @@
-package com.ndrewcoding.libraryapi.service;
+package com.ndrewcoding.libraryapi.api.service;
 
-import com.ndrewcoding.libraryapi.exception.BusinessException;
-import com.ndrewcoding.libraryapi.model.entity.Book;
-import com.ndrewcoding.libraryapi.model.repository.BookRepository;
-import com.ndrewcoding.libraryapi.service.impl.BookServiceImpl;
+import com.ndrewcoding.libraryapi.api.exception.BusinessException;
+import com.ndrewcoding.libraryapi.api.model.entity.Book;
+import com.ndrewcoding.libraryapi.api.model.repository.BookRepository;
+import com.ndrewcoding.libraryapi.api.service.impl.BookServiceImpl;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;

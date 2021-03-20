@@ -1,4 +1,4 @@
-package com.ndrewcoding.libraryapi.dto;
+package com.ndrewcoding.libraryapi.api.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

@@ -1,9 +1,9 @@
-package com.ndrewcoding.libraryapi.service.impl;
+package com.ndrewcoding.libraryapi.api.service.impl;
 
-import com.ndrewcoding.libraryapi.exception.BusinessException;
-import com.ndrewcoding.libraryapi.model.entity.Book;
-import com.ndrewcoding.libraryapi.model.repository.BookRepository;
-import com.ndrewcoding.libraryapi.service.BookService;
+import com.ndrewcoding.libraryapi.api.exception.BusinessException;
+import com.ndrewcoding.libraryapi.api.model.entity.Book;
+import com.ndrewcoding.libraryapi.api.model.repository.BookRepository;
+import com.ndrewcoding.libraryapi.api.service.BookService;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.data.domain.Page;
@@ -57,5 +57,10 @@ public class BookServiceImpl implements BookService {
                 .withIgnoreNullValues()
                 .withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING));
         return bookRepository.findAll(example, pageRequest);
+    }
+
+    @Override
+    public Optional<Book> getBookByIsbn(String isbn) {
+        return Optional.empty();
     }
 }

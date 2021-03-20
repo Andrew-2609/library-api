@@ -1,7 +1,7 @@
 package com.ndrewcoding.libraryapi.repository;
 
-import com.ndrewcoding.libraryapi.model.entity.Book;
-import com.ndrewcoding.libraryapi.model.repository.BookRepository;
+import com.ndrewcoding.libraryapi.api.model.entity.Book;
+import com.ndrewcoding.libraryapi.api.model.repository.BookRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

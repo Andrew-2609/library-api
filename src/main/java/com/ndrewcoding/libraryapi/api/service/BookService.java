@@ -1,6 +1,6 @@
-package com.ndrewcoding.libraryapi.service;
+package com.ndrewcoding.libraryapi.api.service;
 
-import com.ndrewcoding.libraryapi.model.entity.Book;
+import com.ndrewcoding.libraryapi.api.model.entity.Book;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -18,4 +18,6 @@ public interface BookService {
     Book update(Book book);
 
     Page<Book> find(Book bookFilter, Pageable pageRequest);
+
+    Optional<Book> getBookByIsbn(String isbn);
 }

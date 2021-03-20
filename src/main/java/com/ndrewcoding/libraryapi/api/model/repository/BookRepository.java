@@ -1,6 +1,6 @@
-package com.ndrewcoding.libraryapi.model.repository;
+package com.ndrewcoding.libraryapi.api.model.repository;
 
-import com.ndrewcoding.libraryapi.model.entity.Book;
+import com.ndrewcoding.libraryapi.api.model.entity.Book;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

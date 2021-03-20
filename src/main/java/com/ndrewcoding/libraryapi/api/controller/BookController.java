@@ -1,17 +1,13 @@
-package com.ndrewcoding.libraryapi.controller;
+package com.ndrewcoding.libraryapi.api.controller;
 
-import com.ndrewcoding.libraryapi.dto.BookDTO;
-import com.ndrewcoding.libraryapi.exception.ApiErrors;
-import com.ndrewcoding.libraryapi.exception.BusinessException;
-import com.ndrewcoding.libraryapi.model.entity.Book;
-import com.ndrewcoding.libraryapi.service.BookService;
+import com.ndrewcoding.libraryapi.api.dto.BookDTO;
+import com.ndrewcoding.libraryapi.api.model.entity.Book;
+import com.ndrewcoding.libraryapi.api.service.BookService;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -51,7 +47,7 @@ public class BookController {
                 .map(entity -> modelMapper.map(entity, BookDTO.class))
                 .collect(Collectors.toList());
 
-        return new PageImpl<BookDTO>(list, pageRequest, result.getTotalElements());
+        return new PageImpl<>(list, pageRequest, result.getTotalElements());
     }
 
     @PostMapping
@@ -87,18 +83,5 @@ public class BookController {
                 .getById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST));
         bookService.delete(book);
-    }
-
-    @ExceptionHandler(MethodArgumentNotValidException.class)
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ApiErrors handleValidationExceptions(MethodArgumentNotValidException exception) {
-        BindingResult bindingResult = exception.getBindingResult();
-        return new ApiErrors(bindingResult);
-    }
-
-    @ExceptionHandler(BusinessException.class)
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ApiErrors handleBusinessException(BusinessException businessException) {
-        return new ApiErrors(businessException);
     }
 }

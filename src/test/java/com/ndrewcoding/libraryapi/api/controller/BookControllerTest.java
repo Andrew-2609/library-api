@@ -1,10 +1,10 @@
-package com.ndrewcoding.libraryapi.controller;
+package com.ndrewcoding.libraryapi.api.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.ndrewcoding.libraryapi.dto.BookDTO;
-import com.ndrewcoding.libraryapi.exception.BusinessException;
-import com.ndrewcoding.libraryapi.model.entity.Book;
-import com.ndrewcoding.libraryapi.service.BookService;
+import com.ndrewcoding.libraryapi.api.dto.BookDTO;
+import com.ndrewcoding.libraryapi.api.exception.BusinessException;
+import com.ndrewcoding.libraryapi.api.model.entity.Book;
+import com.ndrewcoding.libraryapi.api.service.BookService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -23,7 +23,6 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import java.util.Collections;
 import java.util.Optional;
@@ -34,7 +33,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @ExtendWith(SpringExtension.class)
 @ActiveProfiles("test")
-@WebMvcTest
+@WebMvcTest(controllers = BookController.class)
 @AutoConfigureMockMvc
 public class BookControllerTest {
 
@@ -109,7 +108,7 @@ public class BookControllerTest {
                 .content(json);
 
         mvc.perform(request)
-                .andExpect(MockMvcResultMatchers.status().isCreated())
+                .andExpect(status().isCreated())
                 .andExpect(jsonPath("id").value(1L))
                 .andExpect(jsonPath("title").value(bookDTO.getTitle()))
                 .andExpect(jsonPath("author").value(bookDTO.getAuthor()))
@@ -128,7 +127,7 @@ public class BookControllerTest {
                 .content(json);
 
         mvc.perform(request)
-                .andExpect(MockMvcResultMatchers.status().isBadRequest())
+                .andExpect(status().isBadRequest())
                 .andExpect(jsonPath(
                         "errors",
                         hasSize(Book.class.getDeclaredFields().length - 1
