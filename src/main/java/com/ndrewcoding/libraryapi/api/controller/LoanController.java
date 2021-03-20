@@ -22,7 +22,7 @@ public class LoanController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Long create(@RequestBody LoanDTO loanDTO) {
-        Book foundedBook = bookService.getBookByIsbn(loanDTO.getIsbn())
+        Book foundedBook = bookService.getByIsbn(loanDTO.getIsbn())
                 .orElseThrow(() -> new ResponseStatusException(
                                 HttpStatus.BAD_REQUEST, "There is no Book with this ISBN."
                         )

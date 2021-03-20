@@ -79,7 +79,7 @@ public class BookServiceTest {
 
     @Test
     @DisplayName("Must return a Book with the given id")
-    public void getByIdTest() {
+    public void getBookByIdTest() {
         long id = 1L;
 
         Book book = createValidBook();
@@ -107,6 +107,24 @@ public class BookServiceTest {
         Optional<Book> searchedBook = bookService.getById(id);
 
         assertThat(searchedBook.isPresent()).isFalse();
+    }
+
+    @Test
+    @DisplayName("Must return a Book with the given isbn")
+    public void getBookByIsbnTest() {
+        String isbn = "123";
+
+        Book foundedBook = Book.builder().id(1L).isbn(isbn).build();
+
+        Mockito.when(bookRepository.findByIsbn(isbn)).thenReturn(Optional.of(foundedBook));
+
+        Optional<Book> searchedBook = bookService.getByIsbn(isbn);
+
+        assertThat(searchedBook.isPresent()).isTrue();
+        assertThat(searchedBook.get().getIsbn()).isEqualTo(isbn);
+        assertThat(searchedBook.get().getId()).isEqualTo(foundedBook.getId());
+
+        Mockito.verify(bookRepository, Mockito.times(1)).findByIsbn(isbn);
     }
 
     @Test

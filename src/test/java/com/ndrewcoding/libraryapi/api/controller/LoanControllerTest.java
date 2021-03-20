@@ -55,7 +55,7 @@ public class LoanControllerTest {
 
         Book foundedBook = Book.builder().isbn("123").build();
 
-        BDDMockito.given(bookService.getBookByIsbn("123")).willReturn(Optional.of(foundedBook));
+        BDDMockito.given(bookService.getByIsbn("123")).willReturn(Optional.of(foundedBook));
 
         Loan loan = Loan.builder().id(1L).customer("Andrew").book(foundedBook).loanDate(LocalDate.now()).build();
 
@@ -79,7 +79,7 @@ public class LoanControllerTest {
 
         String json = new ObjectMapper().writeValueAsString(loanDTO);
 
-        BDDMockito.given(bookService.getBookByIsbn(Mockito.anyString())).willReturn(Optional.empty());
+        BDDMockito.given(bookService.getByIsbn(Mockito.anyString())).willReturn(Optional.empty());
 
         MockHttpServletRequestBuilder request = MockMvcRequestBuilders
                 .post(LOAN_API)
@@ -102,7 +102,7 @@ public class LoanControllerTest {
 
         Book foundedBook = Book.builder().id(1L).isbn("123").build();
 
-        BDDMockito.given(bookService.getBookByIsbn("123")).willReturn(Optional.of(foundedBook));
+        BDDMockito.given(bookService.getByIsbn("123")).willReturn(Optional.of(foundedBook));
 
         BDDMockito
                 .given(loanService.save(Mockito.any(Loan.class)))
