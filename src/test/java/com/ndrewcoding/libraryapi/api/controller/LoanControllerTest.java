@@ -2,6 +2,7 @@ package com.ndrewcoding.libraryapi.api.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ndrewcoding.libraryapi.api.dto.LoanDTO;
+import com.ndrewcoding.libraryapi.api.dto.ReturnedLoanDTO;
 import com.ndrewcoding.libraryapi.api.exception.BusinessException;
 import com.ndrewcoding.libraryapi.api.model.entity.Book;
 import com.ndrewcoding.libraryapi.api.model.entity.Loan;
@@ -118,6 +119,52 @@ public class LoanControllerTest {
                 .andExpect(status().isBadRequest())
                 .andExpect(jsonPath("errors", Matchers.hasSize(1)))
                 .andExpect(jsonPath("errors[0]").value("Book already loaned"));
+    }
+
+    @Test
+    @DisplayName("Must return a Book to the Library")
+    public void returnBookTest() throws Exception {
+        ReturnedLoanDTO returnedLoanDTO = ReturnedLoanDTO.builder().returned(true).build();
+
+        String json = new ObjectMapper().writeValueAsString(returnedLoanDTO);
+
+        long id = 1L;
+
+        Loan loan = Loan.builder().id(id).build();
+
+        BDDMockito.given(loanService.getById(id)).willReturn(Optional.of(loan));
+
+        MockHttpServletRequestBuilder request = MockMvcRequestBuilders
+                .patch(LOAN_API.concat("/" + id))
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON)
+                .content(json);
+
+        mvc.perform(request)
+                .andExpect(status().isOk());
+
+        Mockito.verify(loanService, Mockito.times(1)).update(loan);
+    }
+
+    @Test
+    @DisplayName("Must return 404 status code when returning a nonexistent Book to the Library")
+    public void returnNonexistentBook() throws Exception {
+        ReturnedLoanDTO returnedLoanDTO = ReturnedLoanDTO.builder().returned(true).build();
+
+        String json = new ObjectMapper().writeValueAsString(returnedLoanDTO);
+
+        BDDMockito.given(loanService.getById(Mockito.anyLong())).willReturn(Optional.empty());
+
+        MockHttpServletRequestBuilder request = MockMvcRequestBuilders
+                .patch(LOAN_API.concat("/1"))
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON)
+                .content(json);
+
+        mvc.perform(request)
+                .andExpect(status().isNotFound())
+                .andExpect(jsonPath("errors", Matchers.hasSize(1)))
+                .andExpect(jsonPath("errors[0]").value("There is no Loan for this Book"));
     }
 
     private LoanDTO createNewLoanDTO() {

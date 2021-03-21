@@ -1,6 +1,7 @@
 package com.ndrewcoding.libraryapi.api.controller;
 
 import com.ndrewcoding.libraryapi.api.dto.LoanDTO;
+import com.ndrewcoding.libraryapi.api.dto.ReturnedLoanDTO;
 import com.ndrewcoding.libraryapi.api.model.entity.Book;
 import com.ndrewcoding.libraryapi.api.model.entity.Loan;
 import com.ndrewcoding.libraryapi.api.service.BookService;
@@ -39,5 +40,15 @@ public class LoanController {
         return entity.getId();
     }
 
+    @PatchMapping("{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public void returnBook(@PathVariable Long id, @RequestBody ReturnedLoanDTO returnedLoanDTO) {
+        Loan foundedLoan = loanService
+                .getById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "There is no Loan for this Book"));
 
+        foundedLoan.setReturned(returnedLoanDTO.isReturned());
+
+        loanService.update(foundedLoan);
+    }
 }
