@@ -85,7 +85,7 @@ public class BookRepositoryTest {
         assertThat(testEntityManager.find(Book.class, book.getId())).isNull();
     }
 
-    private Book createNewBook(String isbn) {
+    protected static Book createNewBook(String isbn) {
         return Book.builder().title("My Title").author("My Author").isbn(isbn).build();
     }
 }
