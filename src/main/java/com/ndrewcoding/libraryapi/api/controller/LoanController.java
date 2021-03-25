@@ -1,17 +1,25 @@
 package com.ndrewcoding.libraryapi.api.controller;
 
+import com.ndrewcoding.libraryapi.api.dto.BookDTO;
 import com.ndrewcoding.libraryapi.api.dto.LoanDTO;
+import com.ndrewcoding.libraryapi.api.dto.LoanFilterDTO;
 import com.ndrewcoding.libraryapi.api.dto.ReturnedLoanDTO;
 import com.ndrewcoding.libraryapi.api.model.entity.Book;
 import com.ndrewcoding.libraryapi.api.model.entity.Loan;
 import com.ndrewcoding.libraryapi.api.service.BookService;
 import com.ndrewcoding.libraryapi.api.service.LoanService;
 import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.time.LocalDate;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/loans")
@@ -19,6 +27,26 @@ import java.time.LocalDate;
 public class LoanController {
     private final LoanService loanService;
     private final BookService bookService;
+
+    private final ModelMapper modelMapper;
+
+    @GetMapping
+    public Page<LoanDTO> find(LoanFilterDTO filter, Pageable pageable) {
+        Page<Loan> loans = loanService.find(filter, pageable);
+
+        List<LoanDTO> loansList = loans
+                .getContent()
+                .stream()
+                .map(loan -> {
+                    Book book = loan.getBook();
+                    BookDTO bookDTO = modelMapper.map(book, BookDTO.class);
+                    LoanDTO loanDTO = modelMapper.map(loan, LoanDTO.class);
+                    loanDTO.setBookDTO(bookDTO);
+                    return loanDTO;
+                }).collect(Collectors.toList());
+
+        return new PageImpl<>(loansList, pageable, loans.getTotalElements());
+    }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)

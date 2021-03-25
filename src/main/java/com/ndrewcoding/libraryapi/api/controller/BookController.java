@@ -28,7 +28,6 @@ public class BookController {
     }
 
     @GetMapping("{id}")
-    @ResponseStatus(HttpStatus.OK)
     public BookDTO get(@PathVariable Long id) {
         return bookService
                 .getById(id)
@@ -37,7 +36,6 @@ public class BookController {
     }
 
     @GetMapping
-    @ResponseStatus(HttpStatus.OK)
     public Page<BookDTO> find(BookDTO bookDTO, Pageable pageRequest) {
         Book filter = modelMapper.map(bookDTO, Book.class);
 

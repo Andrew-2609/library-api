@@ -19,7 +19,8 @@ import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.catchThrowable;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.verify;
 
 @ExtendWith(SpringExtension.class)
 @ActiveProfiles("test")
@@ -107,7 +108,27 @@ public class LoanServiceTest {
         verify(loanRepository).findById(id);
     }
 
-    private Loan createValidLoan(Book book) {
+    @Test
+    @DisplayName("Must update a Loan")
+    public void updateLoanTest() {
+        Book book = Book.builder().id(1L).build();
+
+        Loan originalLoan = createValidLoan(book);
+
+        originalLoan.setId(1L);
+
+        originalLoan.setReturned(true);
+
+        Mockito.when(loanRepository.save(Mockito.any(Loan.class))).thenReturn(originalLoan);
+
+        Loan updatedLoan = loanService.update(originalLoan);
+
+        assertThat(updatedLoan.isReturned()).isTrue();
+
+        verify(loanRepository).save(originalLoan);
+    }
+
+    public static Loan createValidLoan(Book book) {
         return Loan.builder().book(book).customer("Andrew").loanDate(LocalDate.now()).build();
     }
 }

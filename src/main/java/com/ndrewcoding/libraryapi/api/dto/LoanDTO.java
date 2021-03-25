@@ -12,4 +12,5 @@ import lombok.NoArgsConstructor;
 public class LoanDTO {
     private String isbn;
     private String customer;
+    private BookDTO bookDTO;
 }

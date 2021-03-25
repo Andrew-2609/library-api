@@ -1,6 +1,9 @@
 package com.ndrewcoding.libraryapi.api.service;
 
+import com.ndrewcoding.libraryapi.api.dto.LoanFilterDTO;
 import com.ndrewcoding.libraryapi.api.model.entity.Loan;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -12,4 +15,6 @@ public interface LoanService {
     Optional<Loan> getById(Long id);
 
     Loan update(Loan foundedLoan);
+
+    Page<Loan> find(LoanFilterDTO filter, Pageable pageable);
 }

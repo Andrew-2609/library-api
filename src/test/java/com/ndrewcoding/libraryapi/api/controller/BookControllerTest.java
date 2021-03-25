@@ -236,8 +236,8 @@ public class BookControllerTest {
     }
 
     @Test
-    @DisplayName("Must filter books")
-    public void findBookTest() throws Exception {
+    @DisplayName("Must filter Books")
+    public void findBooksTest() throws Exception {
         Book book = Book.builder()
                 .id(1L)
                 .title(createNewBookDTO().getTitle())
@@ -259,9 +259,9 @@ public class BookControllerTest {
         mvc.perform(request)
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("content", hasSize(1)))
-                .andExpect(jsonPath("totalElements").value(1))
                 .andExpect(jsonPath("pageable.pageNumber").value(0))
-                .andExpect(jsonPath("pageable.pageSize").value(100));
+                .andExpect(jsonPath("pageable.pageSize").value(100))
+                .andExpect(jsonPath("totalElements").value(1));
     }
 
     private BookDTO createNewBookDTO() {

@@ -1,9 +1,12 @@
 package com.ndrewcoding.libraryapi.api.service.impl;
 
+import com.ndrewcoding.libraryapi.api.dto.LoanFilterDTO;
 import com.ndrewcoding.libraryapi.api.exception.BusinessException;
 import com.ndrewcoding.libraryapi.api.model.entity.Loan;
 import com.ndrewcoding.libraryapi.api.model.repository.LoanRepository;
 import com.ndrewcoding.libraryapi.api.service.LoanService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import java.util.Optional;
 
@@ -29,9 +32,11 @@ public class LoanServiceImpl implements LoanService {
 
     @Override
     public Loan update(Loan foundedLoan) {
-        if (foundedLoan == null || foundedLoan.getId() == null) {
-            throw new IllegalArgumentException("There is no Loan with this ID.");
-        }
         return loanRepository.save(foundedLoan);
+    }
+
+    @Override
+    public Page<Loan> find(LoanFilterDTO filter, Pageable pageable) {
+        return null;
     }
 }
