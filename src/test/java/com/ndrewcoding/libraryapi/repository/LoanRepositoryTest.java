@@ -9,6 +9,8 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
@@ -29,20 +31,46 @@ public class LoanRepositoryTest {
     @Test
     @DisplayName("Must verify if there is a Loan of a not yet returned given Book")
     public void existsByBookAndHasNotBeenReturnedTest() {
-        Book book = BookRepositoryTest.createNewBook("123");
+        Loan persistedLoan = createAndPersistALoanAndItsBook();
 
-        Loan loan = createNewLoan(book);
-
-        testEntityManager.persist(book);
-
-        testEntityManager.persist(loan);
-
-        boolean exists = loanRepository.existsByBookAndHasNotBeenReturned(book);
+        boolean exists = loanRepository.existsByBookAndHasNotBeenReturned(persistedLoan.getBook());
 
         assertThat(exists).isTrue();
     }
 
+    @Test
+    @DisplayName("Must find a Loan by its Book's ISBN or by its Customer")
+    public void findByBookIsbnOrCustomerTest() {
+        Loan persistedLoan = createAndPersistALoanAndItsBook();
+
+        Page<Loan> loansResult = loanRepository.findByBookIsbnOrCustomer(
+                "123", "Andrew", PageRequest.of(0, 10)
+        );
+
+        assertThat(loansResult.getContent()).contains(persistedLoan);
+
+        assertThat(loansResult.getContent()).hasSize(1);
+
+        assertThat(loansResult.getTotalElements()).isEqualTo(1);
+
+        assertThat(loansResult.getPageable().getPageNumber()).isEqualTo(0);
+
+        assertThat(loansResult.getPageable().getPageSize()).isEqualTo(10);
+    }
+
     private Loan createNewLoan(Book book) {
         return Loan.builder().book(book).customer("Andrew").loanDate(LocalDate.now()).build();
+    }
+
+    public Loan createAndPersistALoanAndItsBook() {
+        Book book = BookRepositoryTest.createNewBook("123");
+
+        testEntityManager.persist(book);
+
+        Loan loan = createNewLoan(book);
+
+        testEntityManager.persist(loan);
+
+        return loan;
     }
 }

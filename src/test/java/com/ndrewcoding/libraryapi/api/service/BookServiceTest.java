@@ -188,7 +188,7 @@ public class BookServiceTest {
 
     @Test
     @DisplayName("Must filter Books by its properties")
-    public void findBookTest() {
+    public void findBooksTest() {
         //scenery
         Book book = createValidBook();
 
