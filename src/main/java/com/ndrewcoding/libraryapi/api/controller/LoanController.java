@@ -8,7 +8,6 @@ import com.ndrewcoding.libraryapi.api.model.entity.Book;
 import com.ndrewcoding.libraryapi.api.model.entity.Loan;
 import com.ndrewcoding.libraryapi.api.service.BookService;
 import com.ndrewcoding.libraryapi.api.service.LoanService;
-import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
@@ -35,16 +34,7 @@ public class LoanController {
     public Page<LoanDTO> find(LoanFilterDTO filter, Pageable pageable) {
         Page<Loan> loans = loanService.find(filter, pageable);
 
-        List<LoanDTO> loansList = loans
-                .getContent()
-                .stream()
-                .map(loan -> {
-                    Book book = loan.getBook();
-                    BookDTO bookDTO = modelMapper.map(book, BookDTO.class);
-                    LoanDTO loanDTO = modelMapper.map(loan, LoanDTO.class);
-                    loanDTO.setBookDTO(bookDTO);
-                    return loanDTO;
-                }).collect(Collectors.toList());
+        List<LoanDTO> loansList = pageLoanToPageLoanDTO(loans, modelMapper);
 
         return new PageImpl<>(loansList, pageable, loans.getTotalElements());
     }
@@ -61,6 +51,7 @@ public class LoanController {
         Loan entity = Loan.builder()
                 .book(foundedBook)
                 .customer(loanDTO.getCustomer())
+                .customerEmail(loanDTO.getCustomerEmail())
                 .loanDate(LocalDate.now())
                 .build();
 
@@ -79,5 +70,18 @@ public class LoanController {
         foundedLoan.setReturned(returnedLoanDTO.isReturned());
 
         loanService.update(foundedLoan);
+    }
+
+    protected static List<LoanDTO> pageLoanToPageLoanDTO(Page<Loan> loans, ModelMapper modelMapper) {
+        return loans
+                .getContent()
+                .stream()
+                .map(loan -> {
+                    Book book = loan.getBook();
+                    BookDTO bookDTO = modelMapper.map(book, BookDTO.class);
+                    LoanDTO loanDTO = modelMapper.map(loan, LoanDTO.class);
+                    loanDTO.setBookDTO(bookDTO);
+                    return loanDTO;
+                }).collect(Collectors.toList());
     }
 }

@@ -1,9 +1,13 @@
 package com.ndrewcoding.libraryapi.api.controller;
 
 import com.ndrewcoding.libraryapi.api.dto.BookDTO;
+import com.ndrewcoding.libraryapi.api.dto.LoanDTO;
 import com.ndrewcoding.libraryapi.api.model.entity.Book;
+import com.ndrewcoding.libraryapi.api.model.entity.Loan;
 import com.ndrewcoding.libraryapi.api.service.BookService;
+import com.ndrewcoding.libraryapi.api.service.LoanService;
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
@@ -21,10 +25,12 @@ public class BookController {
 
     private final BookService bookService;
     private final ModelMapper modelMapper;
+    private final LoanService loanService;
 
-    public BookController(BookService bookService, ModelMapper mapper) {
+    public BookController(BookService bookService, ModelMapper modelMapper, ObjectProvider<LoanService> loanService) {
         this.bookService = bookService;
-        this.modelMapper = mapper;
+        this.modelMapper = modelMapper;
+        this.loanService = loanService.getIfAvailable();
     }
 
     @GetMapping("{id}")
@@ -81,5 +87,18 @@ public class BookController {
                 .getById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST));
         bookService.delete(book);
+    }
+
+    @GetMapping("{id}/loans")
+    public Page<LoanDTO> loansByBook(@PathVariable Long id, Pageable pageable) {
+        Book foundedBook = bookService
+                .getById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+
+        Page<Loan> loansResult = loanService.getLoansByBook(foundedBook, pageable);
+
+        List<LoanDTO> listLoans = LoanController.pageLoanToPageLoanDTO(loansResult, modelMapper);
+
+        return new PageImpl<>(listLoans, pageable, loansResult.getTotalElements());
     }
 }

@@ -65,7 +65,8 @@ public class LoanControllerTest {
 
         BDDMockito.given(bookService.getByIsbn("123")).willReturn(Optional.of(foundedBook));
 
-        Loan loan = Loan.builder().id(1L).customer("Andrew").book(foundedBook).loanDate(LocalDate.now()).build();
+        Loan loan = Loan.builder().id(1L).customer("Andrew").customerEmail("andrew@email.com")
+                .book(foundedBook).loanDate(LocalDate.now()).build();
 
         BDDMockito.given(loanService.save(Mockito.any(Loan.class))).willReturn(loan);
 
@@ -205,6 +206,6 @@ public class LoanControllerTest {
     }
 
     private LoanDTO createNewLoanDTO() {
-        return LoanDTO.builder().isbn("123").customer("Andrew").build();
+        return LoanDTO.builder().isbn("123").customer("Andrew").customerEmail("andrew@email.com").build();
     }
 }

@@ -15,6 +15,8 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -56,6 +58,28 @@ public class LoanRepositoryTest {
         assertThat(loansResult.getPageable().getPageNumber()).isEqualTo(0);
 
         assertThat(loansResult.getPageable().getPageSize()).isEqualTo(10);
+    }
+
+    @Test
+    @DisplayName("Must get Loans that were loaned at most three days ago and that are not returned")
+    public void findByLoanDateLessThanAndNotReturned() {
+        Loan loan = createAndPersistALoanAndItsBook();
+
+        loan.setLoanDate(LocalDate.now().minus(5, ChronoUnit.DAYS));
+
+        List<Loan> result = loanRepository.findByLoanDateLessThanAndNotReturned(LocalDate.now().minus(4, ChronoUnit.DAYS));
+
+        assertThat(result).hasSize(1).contains(loan);
+    }
+
+    @Test
+    @DisplayName("Must return empty when there are no overdue Loans")
+    public void findByLoanDateLessThanAndNotReturnedReturnsEmptyWhenLoansAreUpToDate() {
+        createAndPersistALoanAndItsBook();
+
+        List<Loan> result = loanRepository.findByLoanDateLessThanAndNotReturned(LocalDate.now().minus(4, ChronoUnit.DAYS));
+
+        assertThat(result).isEmpty();
     }
 
     private Loan createNewLoan(Book book) {

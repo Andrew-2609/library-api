@@ -130,7 +130,7 @@ public class BookControllerTest {
                 .andExpect(status().isBadRequest())
                 .andExpect(jsonPath(
                         "errors",
-                        hasSize(Book.class.getDeclaredFields().length - 1
+                        hasSize(Book.class.getDeclaredFields().length - 2
                         )));
     }
 
