@@ -1,0 +1,12 @@
+{
+  "properties": [
+    {
+      "name": "application.mail.default-sender",
+      "type": "java.lang.String"
+    },
+    {
+      "name": "application.mail.overdueLoans.message",
+      "type": "java.lang.String"
+    }
+  ]
+}

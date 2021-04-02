@@ -1,2 +1,22 @@
 server:
   port: 8081
+
+application:
+  mail:
+    default-sender: ndrewcoding@libraryapi.com
+    overdueLoans:
+      message: You have one or more overdue book loans. Please return them as soon as possible.
+
+spring:
+  mail:
+    protocol: smtp
+    host: smtp.mailtrap.io
+    port: 2525
+    username: fb6db621d7eb1d
+    password: 01f99c8c37a9ff
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
