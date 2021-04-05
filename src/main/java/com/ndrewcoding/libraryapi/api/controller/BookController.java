@@ -10,6 +10,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
+import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.data.domain.Page;
@@ -26,6 +27,7 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/api/books")
 @Api("Book API")
+@Slf4j
 public class BookController {
 
     private final BookService bookService;
@@ -85,12 +87,13 @@ public class BookController {
 
     @PutMapping("{id}")
     @ResponseStatus(HttpStatus.OK)
-    @ApiOperation("Updates the Book with the given ID using its given DTO details")
+    @ApiOperation("Updates the Book with the given ID using its given DTO details (doesnt update the ISBN")
     @ApiResponses({
             @ApiResponse(code = 200, message = "Book successfully updated"),
             @ApiResponse(code = 404, message = "Book not found")
     })
     public BookDTO update(@PathVariable Long id, BookDTO bookDTO) {
+        log.info("updating the Book of id: {}", id);
         return bookService
                 .getById(id)
                 .map(book -> {
@@ -112,6 +115,7 @@ public class BookController {
             @ApiResponse(code = 400, message = "Nonexistent Book")
     })
     public void delete(@PathVariable Long id) {
+        log.info("deleting the Book of id: {}", id);
         Book book = bookService
                 .getById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST));

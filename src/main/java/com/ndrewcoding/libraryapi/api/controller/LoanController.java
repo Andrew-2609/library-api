@@ -13,6 +13,7 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -29,6 +30,7 @@ import java.util.stream.Collectors;
 @RequestMapping("/api/loans")
 @RequiredArgsConstructor
 @Api("Loan API")
+@Slf4j
 public class LoanController {
     private final LoanService loanService;
     private final BookService bookService;
@@ -89,6 +91,7 @@ public class LoanController {
         foundedLoan.setReturned(returnedLoanDTO.isReturned());
 
         loanService.update(foundedLoan);
+        log.info("loan of id {} returned", foundedLoan.getId());
     }
 
     protected static List<LoanDTO> pageLoanToListLoanDTO(Page<Loan> loans, ModelMapper modelMapper) {

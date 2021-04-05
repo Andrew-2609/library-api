@@ -1,0 +1,203 @@
+2021-04-05 10:07:33.966  INFO 16604 --- [restartedMain] c.n.libraryapi.LibraryApiApplication     : Starting LibraryApiApplication using Java 1.8.0_231 on REXY with PID 16604 (C:\Users\andre\Desktop\Bagulos\Cursos\Cursos de Spring\udemy_spring_tdd\library_api\target\classes started by Andrew in C:\Users\andre\Desktop\Bagulos\Cursos\Cursos de Spring\udemy_spring_tdd\library_api)
+2021-04-05 10:07:33.979  INFO 16604 --- [restartedMain] c.n.libraryapi.LibraryApiApplication     : No active profile set, falling back to default profiles: default
+2021-04-05 10:07:34.028  INFO 16604 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2021-04-05 10:07:34.028  INFO 16604 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2021-04-05 10:07:35.934  INFO 16604 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2021-04-05 10:07:35.999  INFO 16604 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 59 ms. Found 2 JPA repository interfaces.
+2021-04-05 10:07:36.548  INFO 16604 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8081 (http)
+2021-04-05 10:07:36.558  INFO 16604 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2021-04-05 10:07:36.558  INFO 16604 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.43]
+2021-04-05 10:07:36.688  INFO 16604 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2021-04-05 10:07:36.688  INFO 16604 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2660 ms
+2021-04-05 10:07:36.932  INFO 16604 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2021-04-05 10:07:37.079  INFO 16604 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2021-04-05 10:07:37.079  INFO 16604 --- [restartedMain] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:60e411a8-476b-422e-abcc-c1aef3b9d365'
+2021-04-05 10:07:37.204  INFO 16604 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2021-04-05 10:07:37.248  INFO 16604 --- [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.4.28.Final
+2021-04-05 10:07:37.348  INFO 16604 --- [restartedMain] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2021-04-05 10:07:37.446  INFO 16604 --- [restartedMain] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2021-04-05 10:07:38.053  INFO 16604 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2021-04-05 10:07:38.064  INFO 16604 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2021-04-05 10:07:38.096  INFO 16604 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2021-04-05 10:07:38.748  WARN 16604 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2021-04-05 10:07:39.178  INFO 16604 --- [restartedMain] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 14 endpoint(s) beneath base path '/actuator'
+2021-04-05 10:07:39.306  INFO 16604 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2021-04-05 10:07:39.478  INFO 16604 --- [restartedMain] o.s.s.c.ThreadPoolTaskScheduler          : Initializing ExecutorService 'taskScheduler'
+2021-04-05 10:07:39.569  INFO 16604 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8081 (http) with context path ''
+2021-04-05 10:07:39.569  INFO 16604 --- [restartedMain] d.s.w.p.DocumentationPluginsBootstrapper : Context refreshed
+2021-04-05 10:07:39.594  INFO 16604 --- [restartedMain] d.s.w.p.DocumentationPluginsBootstrapper : Found 1 custom documentation plugin(s)
+2021-04-05 10:07:39.602  INFO 16604 --- [restartedMain] s.d.s.w.s.ApiListingReferenceScanner     : Scanning for api listing references
+2021-04-05 10:07:39.766  INFO 16604 --- [restartedMain] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: createUsingPOST_1
+2021-04-05 10:07:39.774  INFO 16604 --- [restartedMain] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: findUsingGET_1
+2021-04-05 10:07:39.809  INFO 16604 --- [restartedMain] c.n.libraryapi.LibraryApiApplication     : Started LibraryApiApplication in 6.577 seconds (JVM running for 7.632)
+2021-04-05 10:07:40.229  INFO 16604 --- [RMI TCP Connection(6)-192.168.40.140] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2021-04-05 10:07:40.229  INFO 16604 --- [RMI TCP Connection(6)-192.168.40.140] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2021-04-05 10:07:40.229  INFO 16604 --- [RMI TCP Connection(6)-192.168.40.140] o.s.web.servlet.DispatcherServlet        : Completed initialization in 0 ms
+2021-04-05 10:15:06.473  INFO 17088 --- [restartedMain] c.n.libraryapi.LibraryApiApplication     : Starting LibraryApiApplication using Java 1.8.0_231 on REXY with PID 17088 (C:\Users\andre\Desktop\Bagulos\Cursos\Cursos de Spring\udemy_spring_tdd\library_api\target\classes started by Andrew in C:\Users\andre\Desktop\Bagulos\Cursos\Cursos de Spring\udemy_spring_tdd\library_api)
+2021-04-05 10:15:06.481  INFO 17088 --- [restartedMain] c.n.libraryapi.LibraryApiApplication     : No active profile set, falling back to default profiles: default
+2021-04-05 10:15:06.537  INFO 17088 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2021-04-05 10:15:06.537  INFO 17088 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2021-04-05 10:15:07.825  INFO 17088 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2021-04-05 10:15:07.889  INFO 17088 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 55 ms. Found 2 JPA repository interfaces.
+2021-04-05 10:15:08.393  INFO 17088 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8081 (http)
+2021-04-05 10:15:08.401  INFO 17088 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2021-04-05 10:15:08.401  INFO 17088 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.43]
+2021-04-05 10:15:08.540  INFO 17088 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2021-04-05 10:15:08.540  INFO 17088 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2003 ms
+2021-04-05 10:15:08.692  INFO 17088 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2021-04-05 10:15:08.780  INFO 17088 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2021-04-05 10:15:08.780  INFO 17088 --- [restartedMain] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:12fb57ec-f47a-4707-83c9-fdde024e66d6'
+2021-04-05 10:15:08.900  INFO 17088 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2021-04-05 10:15:08.940  INFO 17088 --- [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.4.28.Final
+2021-04-05 10:15:09.036  INFO 17088 --- [restartedMain] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2021-04-05 10:15:09.124  INFO 17088 --- [restartedMain] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2021-04-05 10:15:09.677  INFO 17088 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2021-04-05 10:15:09.685  INFO 17088 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2021-04-05 10:15:09.717  INFO 17088 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2021-04-05 10:15:10.509  WARN 17088 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2021-04-05 10:15:10.685  INFO 17088 --- [restartedMain] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 14 endpoint(s) beneath base path '/actuator'
+2021-04-05 10:15:10.805  INFO 17088 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2021-04-05 10:15:10.957  INFO 17088 --- [restartedMain] o.s.s.c.ThreadPoolTaskScheduler          : Initializing ExecutorService 'taskScheduler'
+2021-04-05 10:15:11.021  INFO 17088 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8081 (http) with context path ''
+2021-04-05 10:15:11.021  INFO 17088 --- [restartedMain] d.s.w.p.DocumentationPluginsBootstrapper : Context refreshed
+2021-04-05 10:15:11.037  INFO 17088 --- [restartedMain] d.s.w.p.DocumentationPluginsBootstrapper : Found 1 custom documentation plugin(s)
+2021-04-05 10:15:11.045  INFO 17088 --- [restartedMain] s.d.s.w.s.ApiListingReferenceScanner     : Scanning for api listing references
+2021-04-05 10:15:11.197  INFO 17088 --- [restartedMain] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: createUsingPOST_1
+2021-04-05 10:15:11.205  INFO 17088 --- [restartedMain] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: findUsingGET_1
+2021-04-05 10:15:11.229  INFO 17088 --- [restartedMain] c.n.libraryapi.LibraryApiApplication     : Started LibraryApiApplication in 5.261 seconds (JVM running for 6.484)
+2021-04-05 10:15:11.829  INFO 17088 --- [RMI TCP Connection(1)-192.168.40.140] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2021-04-05 10:15:11.829  INFO 17088 --- [RMI TCP Connection(1)-192.168.40.140] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2021-04-05 10:15:11.829  INFO 17088 --- [RMI TCP Connection(1)-192.168.40.140] o.s.web.servlet.DispatcherServlet        : Completed initialization in 0 ms
+2021-04-05 10:16:11.542  WARN 17088 --- [http-nio-8081-exec-2] o.springframework.validation.DataBinder  : Skipping URI variable 'id' because request contains bind value with same name.
+2021-04-05 10:16:11.550  INFO 17088 --- [http-nio-8081-exec-2] c.n.l.api.controller.BookController      : updating the Book of id: 1
+2021-04-05 10:22:48.881  INFO 17088 --- [http-nio-8081-exec-2] c.n.l.api.controller.BookController      : deleting the Book of id: 1
+2021-04-05 10:23:19.949  INFO 17088 --- [http-nio-8081-exec-8] c.n.l.api.controller.BookController      : deleting the Book of id: 13
+2021-04-05 10:23:19.957  WARN 17088 --- [http-nio-8081-exec-8] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [org.springframework.web.server.ResponseStatusException: 400 BAD_REQUEST]
+2021-04-05 10:23:39.398  WARN 17088 --- [http-nio-8081-exec-7] o.springframework.validation.DataBinder  : Skipping URI variable 'id' because request contains bind value with same name.
+2021-04-05 10:23:39.398  INFO 17088 --- [http-nio-8081-exec-7] c.n.l.api.controller.BookController      : updating the Book of id: 1
+2021-04-05 10:23:39.406  WARN 17088 --- [http-nio-8081-exec-7] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [org.springframework.web.server.ResponseStatusException: 404 NOT_FOUND]
+2021-04-05 10:23:39.447  WARN 17088 --- [http-nio-8081-exec-9] o.springframework.validation.DataBinder  : Skipping URI variable 'id' because request contains bind value with same name.
+2021-04-05 10:23:39.447  INFO 17088 --- [http-nio-8081-exec-9] c.n.l.api.controller.BookController      : updating the Book of id: 1
+2021-04-05 10:23:39.447  WARN 17088 --- [http-nio-8081-exec-9] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [org.springframework.web.server.ResponseStatusException: 404 NOT_FOUND]
+2021-04-05 10:53:14.370  INFO 16636 --- [restartedMain] c.n.libraryapi.LibraryApiApplication     : Starting LibraryApiApplication using Java 1.8.0_231 on REXY with PID 16636 (C:\Users\andre\Desktop\Bagulos\Cursos\Cursos de Spring\udemy_spring_tdd\library_api\target\classes started by Andrew in C:\Users\andre\Desktop\Bagulos\Cursos\Cursos de Spring\udemy_spring_tdd\library_api)
+2021-04-05 10:53:14.448  INFO 16636 --- [restartedMain] c.n.libraryapi.LibraryApiApplication     : No active profile set, falling back to default profiles: default
+2021-04-05 10:53:15.056  INFO 16636 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2021-04-05 10:53:15.056  INFO 16636 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2021-04-05 10:53:20.094  INFO 16636 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2021-04-05 10:53:20.199  INFO 16636 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 96 ms. Found 2 JPA repository interfaces.
+2021-04-05 10:53:21.636  INFO 16636 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8081 (http)
+2021-04-05 10:53:21.652  INFO 16636 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2021-04-05 10:53:21.652  INFO 16636 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.43]
+2021-04-05 10:53:21.908  INFO 16636 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2021-04-05 10:53:21.908  INFO 16636 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 6852 ms
+2021-04-05 10:53:22.181  INFO 16636 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2021-04-05 10:53:22.345  INFO 16636 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2021-04-05 10:53:22.360  INFO 16636 --- [restartedMain] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:22fe9120-a6c0-4fef-aac8-7a548c14131a'
+2021-04-05 10:53:22.438  INFO 16636 --- [restartedMain] o.s.b.a.e.web.ServletEndpointRegistrar   : Registered '/actuator/jolokia' to jolokia-actuator-endpoint
+2021-04-05 10:53:22.676  INFO 16636 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2021-04-05 10:53:22.799  INFO 16636 --- [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.4.28.Final
+2021-04-05 10:53:23.078  INFO 16636 --- [restartedMain] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2021-04-05 10:53:23.330  INFO 16636 --- [restartedMain] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2021-04-05 10:53:24.380  INFO 16636 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2021-04-05 10:53:24.430  INFO 16636 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2021-04-05 10:53:24.512  INFO 16636 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2021-04-05 10:53:26.871  WARN 16636 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2021-04-05 10:53:27.773  INFO 16636 --- [restartedMain] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 15 endpoint(s) beneath base path '/actuator'
+2021-04-05 10:53:28.085  INFO 16636 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2021-04-05 10:53:28.336  INFO 16636 --- [restartedMain] o.s.s.c.ThreadPoolTaskScheduler          : Initializing ExecutorService
+2021-04-05 10:53:28.445  INFO 16636 --- [restartedMain] o.s.s.c.ThreadPoolTaskScheduler          : Initializing ExecutorService 'taskScheduler'
+2021-04-05 10:53:28.592  INFO 16636 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8081 (http) with context path ''
+2021-04-05 10:53:28.600  INFO 16636 --- [restartedMain] d.s.w.p.DocumentationPluginsBootstrapper : Context refreshed
+2021-04-05 10:53:28.632  INFO 16636 --- [restartedMain] d.s.w.p.DocumentationPluginsBootstrapper : Found 1 custom documentation plugin(s)
+2021-04-05 10:53:28.648  INFO 16636 --- [restartedMain] s.d.s.w.s.ApiListingReferenceScanner     : Scanning for api listing references
+2021-04-05 10:53:28.938  INFO 16636 --- [restartedMain] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: createUsingPOST_1
+2021-04-05 10:53:28.938  INFO 16636 --- [restartedMain] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: findUsingGET_1
+2021-04-05 10:53:28.994  INFO 16636 --- [restartedMain] c.n.libraryapi.LibraryApiApplication     : Started LibraryApiApplication in 17.559 seconds (JVM running for 27.585)
+2021-04-05 10:53:29.274  INFO 16636 --- [RMI TCP Connection(1)-192.168.40.140] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2021-04-05 10:53:29.274  INFO 16636 --- [RMI TCP Connection(1)-192.168.40.140] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2021-04-05 10:53:29.282  INFO 16636 --- [RMI TCP Connection(1)-192.168.40.140] o.s.web.servlet.DispatcherServlet        : Completed initialization in 8 ms
+2021-04-05 10:53:29.754  WARN 16636 --- [registrationTask1] d.c.b.a.c.r.ApplicationRegistrator       : Failed to register application as Application(name=spring-boot-application, managementUrl=http://host.docker.internal:8081/actuator, healthUrl=http://host.docker.internal:8081/actuator/health, serviceUrl=http://host.docker.internal:8081/) at spring-boot-admin ([http://localhost:8081//instances]): 404 : [{"timestamp":"2021-04-05T13:53:29.698+00:00","status":404,"error":"Not Found","message":"No message available","path":"/instances"}]. Further attempts are logged on DEBUG level
+2021-04-05 11:05:31.031  INFO 14896 --- [restartedMain] c.n.libraryapi.LibraryApiApplication     : Starting LibraryApiApplication using Java 1.8.0_231 on REXY with PID 14896 (C:\Users\andre\Desktop\Bagulos\Cursos\Cursos de Spring\udemy_spring_tdd\library_api\target\classes started by Andrew in C:\Users\andre\Desktop\Bagulos\Cursos\Cursos de Spring\udemy_spring_tdd\library_api)
+2021-04-05 11:05:31.058  INFO 14896 --- [restartedMain] c.n.libraryapi.LibraryApiApplication     : No active profile set, falling back to default profiles: default
+2021-04-05 11:05:31.158  INFO 14896 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2021-04-05 11:05:31.159  INFO 14896 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2021-04-05 11:05:33.669  INFO 14896 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2021-04-05 11:05:33.793  INFO 14896 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 113 ms. Found 2 JPA repository interfaces.
+2021-04-05 11:05:34.690  INFO 14896 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8081 (http)
+2021-04-05 11:05:34.698  INFO 14896 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2021-04-05 11:05:34.698  INFO 14896 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.43]
+2021-04-05 11:05:34.916  INFO 14896 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2021-04-05 11:05:34.918  INFO 14896 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 3759 ms
+2021-04-05 11:05:35.097  INFO 14896 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2021-04-05 11:05:35.972  INFO 14896 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2021-04-05 11:05:35.992  INFO 14896 --- [restartedMain] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:172e8e48-7158-4717-8629-87b156a2c16b'
+2021-04-05 11:05:36.063  INFO 14896 --- [restartedMain] o.s.b.a.e.web.ServletEndpointRegistrar   : Registered '/actuator/jolokia' to jolokia-actuator-endpoint
+2021-04-05 11:05:36.398  INFO 14896 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2021-04-05 11:05:37.271  INFO 14896 --- [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.4.28.Final
+2021-04-05 11:05:38.803  INFO 14896 --- [restartedMain] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2021-04-05 11:05:39.994  INFO 14896 --- [restartedMain] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2021-04-05 11:05:41.188  INFO 14896 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2021-04-05 11:05:41.204  INFO 14896 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2021-04-05 11:05:41.235  INFO 14896 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2021-04-05 11:05:42.614  WARN 14896 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2021-04-05 11:05:42.849  INFO 14896 --- [restartedMain] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 15 endpoint(s) beneath base path '/actuator'
+2021-04-05 11:05:42.989  INFO 14896 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2021-04-05 11:05:43.130  INFO 14896 --- [restartedMain] o.s.s.c.ThreadPoolTaskScheduler          : Initializing ExecutorService
+2021-04-05 11:05:43.239  INFO 14896 --- [restartedMain] o.s.s.c.ThreadPoolTaskScheduler          : Initializing ExecutorService 'taskScheduler'
+2021-04-05 11:05:43.333  INFO 14896 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8081 (http) with context path ''
+2021-04-05 11:05:43.333  INFO 14896 --- [restartedMain] d.s.w.p.DocumentationPluginsBootstrapper : Context refreshed
+2021-04-05 11:05:43.364  INFO 14896 --- [restartedMain] d.s.w.p.DocumentationPluginsBootstrapper : Found 1 custom documentation plugin(s)
+2021-04-05 11:05:43.364  INFO 14896 --- [restartedMain] s.d.s.w.s.ApiListingReferenceScanner     : Scanning for api listing references
+2021-04-05 11:05:43.559  INFO 14896 --- [restartedMain] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: createUsingPOST_1
+2021-04-05 11:05:43.565  INFO 14896 --- [restartedMain] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: findUsingGET_1
+2021-04-05 11:05:43.598  INFO 14896 --- [restartedMain] c.n.libraryapi.LibraryApiApplication     : Started LibraryApiApplication in 13.202 seconds (JVM running for 14.036)
+2021-04-05 11:05:43.721  WARN 14896 --- [registrationTask1] d.c.b.a.c.r.ApplicationRegistrator       : Failed to register application as Application(name=spring-boot-application, managementUrl=http://host.docker.internal:8081/actuator, healthUrl=http://host.docker.internal:8081/actuator/health, serviceUrl=http://host.docker.internal:8081/) at spring-boot-admin ([http://localhost:8082//instances]): 404 : [{"timestamp":"2021-04-05T14:05:43.713+00:00","status":404,"error":"Not Found","message":"","path":"/instances"}]. Further attempts are logged on DEBUG level
+2021-04-05 11:05:44.092  INFO 14896 --- [RMI TCP Connection(3)-192.168.40.140] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2021-04-05 11:05:44.093  INFO 14896 --- [RMI TCP Connection(3)-192.168.40.140] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2021-04-05 11:05:44.095  INFO 14896 --- [RMI TCP Connection(3)-192.168.40.140] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+2021-04-05 11:27:34.606  INFO 776 --- [restartedMain] c.n.libraryapi.LibraryApiApplication     : Starting LibraryApiApplication using Java 1.8.0_231 on REXY with PID 776 (C:\Users\andre\Desktop\Bagulos\Cursos\Cursos de Spring\udemy_spring_tdd\library_api\target\classes started by Andrew in C:\Users\andre\Desktop\Bagulos\Cursos\Cursos de Spring\udemy_spring_tdd\library_api)
+2021-04-05 11:27:34.622  INFO 776 --- [restartedMain] c.n.libraryapi.LibraryApiApplication     : No active profile set, falling back to default profiles: default
+2021-04-05 11:27:34.716  INFO 776 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2021-04-05 11:27:34.716  INFO 776 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2021-04-05 11:27:36.691  INFO 776 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2021-04-05 11:27:36.784  INFO 776 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 86 ms. Found 2 JPA repository interfaces.
+2021-04-05 11:27:37.346  INFO 776 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8081 (http)
+2021-04-05 11:27:37.362  INFO 776 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2021-04-05 11:27:37.362  INFO 776 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.43]
+2021-04-05 11:27:37.542  INFO 776 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2021-04-05 11:27:37.543  INFO 776 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2827 ms
+2021-04-05 11:27:37.686  INFO 776 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2021-04-05 11:27:37.896  INFO 776 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2021-04-05 11:27:37.902  INFO 776 --- [restartedMain] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:2dabb789-c3dc-4cbe-8cec-5890403faaf9'
+2021-04-05 11:27:38.289  INFO 776 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2021-04-05 11:27:38.373  INFO 776 --- [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.4.28.Final
+2021-04-05 11:27:38.770  INFO 776 --- [restartedMain] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2021-04-05 11:27:38.913  INFO 776 --- [restartedMain] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2021-04-05 11:27:39.697  INFO 776 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2021-04-05 11:27:39.705  INFO 776 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2021-04-05 11:27:39.737  INFO 776 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2021-04-05 11:27:40.994  WARN 776 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2021-04-05 11:27:41.197  INFO 776 --- [restartedMain] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 14 endpoint(s) beneath base path '/actuator'
+2021-04-05 11:27:41.353  INFO 776 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2021-04-05 11:27:41.600  INFO 776 --- [restartedMain] o.s.s.c.ThreadPoolTaskScheduler          : Initializing ExecutorService
+2021-04-05 11:27:41.653  INFO 776 --- [restartedMain] o.s.s.c.ThreadPoolTaskScheduler          : Initializing ExecutorService 'taskScheduler'
+2021-04-05 11:27:41.746  INFO 776 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8081 (http) with context path ''
+2021-04-05 11:27:41.746  INFO 776 --- [restartedMain] d.s.w.p.DocumentationPluginsBootstrapper : Context refreshed
+2021-04-05 11:27:41.762  INFO 776 --- [restartedMain] d.s.w.p.DocumentationPluginsBootstrapper : Found 1 custom documentation plugin(s)
+2021-04-05 11:27:41.778  INFO 776 --- [restartedMain] s.d.s.w.s.ApiListingReferenceScanner     : Scanning for api listing references
+2021-04-05 11:27:42.012  INFO 776 --- [restartedMain] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: createUsingPOST_1
+2021-04-05 11:27:42.012  INFO 776 --- [restartedMain] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: findUsingGET_1
+2021-04-05 11:27:42.043  INFO 776 --- [restartedMain] c.n.libraryapi.LibraryApiApplication     : Started LibraryApiApplication in 8.225 seconds (JVM running for 9.516)
+2021-04-05 11:27:42.550  INFO 776 --- [RMI TCP Connection(2)-192.168.40.140] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2021-04-05 11:27:42.550  INFO 776 --- [RMI TCP Connection(2)-192.168.40.140] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2021-04-05 11:27:42.551  INFO 776 --- [RMI TCP Connection(2)-192.168.40.140] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2021-04-05 11:27:45.412  INFO 776 --- [registrationTask1] d.c.b.a.c.r.ApplicationRegistrator       : Application registered itself as 75a7be479074
+2021-04-05 11:31:12.785  WARN 776 --- [http-nio-8081-exec-7] o.springframework.validation.DataBinder  : Skipping URI variable 'id' because request contains bind value with same name.
+2021-04-05 11:31:12.813  INFO 776 --- [http-nio-8081-exec-7] c.n.l.api.controller.BookController      : updating the Book of id: 1
+2021-04-05 11:31:42.957  WARN 776 --- [http-nio-8081-exec-5] o.springframework.validation.DataBinder  : Skipping URI variable 'id' because request contains bind value with same name.
+2021-04-05 11:31:42.958  INFO 776 --- [http-nio-8081-exec-5] c.n.l.api.controller.BookController      : updating the Book of id: 1
+2021-04-05 11:31:46.887  WARN 776 --- [http-nio-8081-exec-1] o.springframework.validation.DataBinder  : Skipping URI variable 'id' because request contains bind value with same name.
+2021-04-05 11:31:46.888  INFO 776 --- [http-nio-8081-exec-1] c.n.l.api.controller.BookController      : updating the Book of id: 1
+2021-04-05 11:31:57.256  WARN 776 --- [http-nio-8081-exec-3] o.springframework.validation.DataBinder  : Skipping URI variable 'id' because request contains bind value with same name.
+2021-04-05 11:31:57.256  INFO 776 --- [http-nio-8081-exec-3] c.n.l.api.controller.BookController      : updating the Book of id: 1
+2021-04-05 11:32:21.156  INFO 776 --- [http-nio-8081-exec-1] c.n.l.api.controller.BookController      : deleting the Book of id: 1
