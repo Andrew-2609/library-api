@@ -6,6 +6,10 @@ import com.ndrewcoding.libraryapi.api.model.entity.Book;
 import com.ndrewcoding.libraryapi.api.model.entity.Loan;
 import com.ndrewcoding.libraryapi.api.service.BookService;
 import com.ndrewcoding.libraryapi.api.service.LoanService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.data.domain.Page;
@@ -21,6 +25,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/books")
+@Api("Book API")
 public class BookController {
 
     private final BookService bookService;
@@ -34,6 +39,11 @@ public class BookController {
     }
 
     @GetMapping("{id}")
+    @ApiOperation("Gets the details of a Book by its ID")
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "Book successfully found"),
+            @ApiResponse(code = 404, message = "Book not found")
+    })
     public BookDTO get(@PathVariable Long id) {
         return bookService
                 .getById(id)
@@ -42,6 +52,10 @@ public class BookController {
     }
 
     @GetMapping
+    @ApiOperation("Finds all existing Books")
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "Books successfully returned")
+    })
     public Page<BookDTO> find(BookDTO bookDTO, Pageable pageRequest) {
         Book filter = modelMapper.map(bookDTO, Book.class);
 
@@ -56,6 +70,11 @@ public class BookController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
+    @ApiOperation("Creates a Book based on its DTO details")
+    @ApiResponses({
+            @ApiResponse(code = 201, message = "Book successfully created"),
+            @ApiResponse(code = 400, message = "ISBN already registered")
+    })
     public BookDTO create(@RequestBody @Valid BookDTO bookDTO) {
         Book entity = modelMapper.map(bookDTO, Book.class);
 
@@ -66,6 +85,11 @@ public class BookController {
 
     @PutMapping("{id}")
     @ResponseStatus(HttpStatus.OK)
+    @ApiOperation("Updates the Book with the given ID using its given DTO details")
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "Book successfully updated"),
+            @ApiResponse(code = 404, message = "Book not found")
+    })
     public BookDTO update(@PathVariable Long id, BookDTO bookDTO) {
         return bookService
                 .getById(id)
@@ -82,6 +106,11 @@ public class BookController {
 
     @DeleteMapping("{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
+    @ApiOperation("Deletes the Book with the given ID")
+    @ApiResponses({
+            @ApiResponse(code = 204, message = "Book successfully deleted"),
+            @ApiResponse(code = 400, message = "Nonexistent Book")
+    })
     public void delete(@PathVariable Long id) {
         Book book = bookService
                 .getById(id)
@@ -90,6 +119,11 @@ public class BookController {
     }
 
     @GetMapping("{id}/loans")
+    @ApiOperation("Gets all the Loans of the Book with the given ID")
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "Book Loans successfully returned"),
+            @ApiResponse(code = 404, message = "Book not found")
+    })
     public Page<LoanDTO> loansByBook(@PathVariable Long id, Pageable pageable) {
         Book foundedBook = bookService
                 .getById(id)
@@ -97,7 +131,7 @@ public class BookController {
 
         Page<Loan> loansResult = loanService.getLoansByBook(foundedBook, pageable);
 
-        List<LoanDTO> listLoans = LoanController.pageLoanToPageLoanDTO(loansResult, modelMapper);
+        List<LoanDTO> listLoans = LoanController.pageLoanToListLoanDTO(loansResult, modelMapper);
 
         return new PageImpl<>(listLoans, pageable, loansResult.getTotalElements());
     }
