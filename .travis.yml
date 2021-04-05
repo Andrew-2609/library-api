@@ -3,6 +3,5 @@ jdk:
   - oraclejdk8
 
 dist: trusty
-os: windows
 before_install:
   - chmod +x mvnw
