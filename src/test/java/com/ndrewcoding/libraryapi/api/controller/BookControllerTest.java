@@ -131,10 +131,7 @@ public class BookControllerTest {
 
         mvc.perform(request)
                 .andExpect(status().isBadRequest())
-                .andExpect(jsonPath(
-                        "errors",
-                        hasSize(Book.class.getDeclaredFields().length - 2
-                        )));
+                .andExpect(jsonPath("errors", hasSize(3)));
     }
 
     @Test
