@@ -10,9 +10,9 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
@@ -26,6 +26,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/books")
+@RequiredArgsConstructor
 @Api("Book API")
 @Slf4j
 public class BookController {
@@ -33,12 +34,6 @@ public class BookController {
     private final BookService bookService;
     private final ModelMapper modelMapper;
     private final LoanService loanService;
-
-    public BookController(BookService bookService, ModelMapper modelMapper, ObjectProvider<LoanService> loanService) {
-        this.bookService = bookService;
-        this.modelMapper = modelMapper;
-        this.loanService = loanService.getIfAvailable();
-    }
 
     @GetMapping("{id}")
     @ApiOperation("Gets the details of a Book by its ID")
@@ -92,7 +87,7 @@ public class BookController {
             @ApiResponse(code = 200, message = "Book successfully updated"),
             @ApiResponse(code = 404, message = "Book not found")
     })
-    public BookDTO update(@PathVariable Long id, BookDTO bookDTO) {
+    public BookDTO update(@PathVariable Long id, @Valid @RequestBody BookDTO bookDTO) {
         log.info("updating the Book of id: {}", id);
         return bookService
                 .getById(id)

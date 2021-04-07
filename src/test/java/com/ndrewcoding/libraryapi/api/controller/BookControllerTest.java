@@ -5,6 +5,7 @@ import com.ndrewcoding.libraryapi.api.dto.BookDTO;
 import com.ndrewcoding.libraryapi.api.exception.BusinessException;
 import com.ndrewcoding.libraryapi.api.model.entity.Book;
 import com.ndrewcoding.libraryapi.api.service.BookService;
+import com.ndrewcoding.libraryapi.api.service.LoanService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -44,6 +45,8 @@ public class BookControllerTest {
 
     @MockBean
     BookService bookService;
+    @MockBean
+    LoanService loanService;
 
     @Test
     @DisplayName("Must return the details of a Book")
