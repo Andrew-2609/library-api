@@ -62,7 +62,7 @@ public class LoanRepositoryTest {
 
     @Test
     @DisplayName("Must get Loans that were loaned at most three days ago and that are not returned")
-    public void findByLoanDateLessThanAndNotReturned() {
+    public void findByLoanDateLessThanAndNotReturnedTest() {
         Loan loan = createAndPersistALoanAndItsBook();
 
         loan.setLoanDate(LocalDate.now().minus(5, ChronoUnit.DAYS));
@@ -74,7 +74,7 @@ public class LoanRepositoryTest {
 
     @Test
     @DisplayName("Must return empty when there are no overdue Loans")
-    public void findByLoanDateLessThanAndNotReturnedReturnsEmptyWhenLoansAreUpToDate() {
+    public void findByLoanDateLessThanAndNotReturnedReturnsEmptyWhenLoansAreUpToDateTest() {
         createAndPersistALoanAndItsBook();
 
         List<Loan> result = loanRepository.findByLoanDateLessThanAndNotReturned(LocalDate.now().minus(4, ChronoUnit.DAYS));

@@ -205,7 +205,7 @@ public class LoanServiceTest {
 
     @Test
     @DisplayName("Must return empty when searching the Loans of a nonexistent Book")
-    public void finLoansByNonexistentBookTest() {
+    public void findLoansByNonexistentBookTest() {
         Book book = Book.builder().id(1L).build();
 
         PageRequest pageRequest = PageRequest.of(0, 10);
@@ -219,8 +219,40 @@ public class LoanServiceTest {
         assertThat(foundLoans.isEmpty()).isTrue();
     }
 
+    @Test
+    @DisplayName("Must return all not returned overdue Loans")
+    public void getAllNotReturnedOverdueLoansTest() {
+        Book book = Book.builder().id(1L).build();
+
+        Loan loan = createValidLoan(book);
+
+        List<Loan> loansList = Collections.singletonList(loan);
+
+        Mockito
+                .when(loanRepository.findByLoanDateLessThanAndNotReturned(Mockito.any(LocalDate.class)))
+                .thenReturn(loansList);
+
+        List<Loan> allOverdueLoans = loanService.getAllOverdueLoans();
+
+        assertThat(allOverdueLoans).hasSize(1).contains(loan);
+    }
+
+    @Test
+    @DisplayName("Returns empty when there are no not returned overdue Loans")
+    public void getAllNotReturnedOverdueLoansReturnsEmptyWhenThereAreNoneTest() {
+        List<Loan> loansList = Collections.emptyList();
+
+        Mockito
+                .when(loanRepository.findByLoanDateLessThanAndNotReturned(Mockito.any(LocalDate.class)))
+                .thenReturn(loansList);
+
+        List<Loan> allOverdueLoans = loanService.getAllOverdueLoans();
+
+        assertThat(allOverdueLoans).isEmpty();
+    }
+
     public static Loan createValidLoan(Book book) {
         return Loan.builder().book(book).customer("Andrew").customerEmail("andrew@email.com")
-                .loanDate(LocalDate.now()).build();
+                .loanDate(LocalDate.now()).returned(false).build();
     }
 }
