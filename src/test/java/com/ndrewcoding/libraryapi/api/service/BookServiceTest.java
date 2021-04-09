@@ -215,7 +215,7 @@ public class BookServiceTest {
         assertThat(booksResult.getPageable().getPageSize()).isEqualTo(pageSize);
     }
 
-    private Book createValidBook() {
+    protected static Book createValidBook() {
         return Book.builder().title("My Book").author("My Author").isbn("001").build();
     }
 }

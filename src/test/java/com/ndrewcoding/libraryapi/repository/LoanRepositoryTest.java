@@ -82,6 +82,24 @@ public class LoanRepositoryTest {
         assertThat(result).isEmpty();
     }
 
+    @Test
+    @DisplayName("Must return all the Loans of a given Book")
+    public void findByBookTest() {
+        Loan persistedLoan = createAndPersistALoanAndItsBook();
+
+        Page<Loan> loansByBook = loanRepository.findByBook(persistedLoan.getBook(), PageRequest.of(0, 10));
+
+        assertThat(loansByBook.getContent()).contains(persistedLoan);
+
+        assertThat(loansByBook.getContent()).hasSize(1);
+
+        assertThat(loansByBook.getTotalElements()).isEqualTo(1);
+
+        assertThat(loansByBook.getPageable().getPageNumber()).isEqualTo(0);
+
+        assertThat(loansByBook.getPageable().getPageSize()).isEqualTo(10);
+    }
+
     private Loan createNewLoan(Book book) {
         return Loan.builder().book(book).customer("Andrew").loanDate(LocalDate.now()).build();
     }
