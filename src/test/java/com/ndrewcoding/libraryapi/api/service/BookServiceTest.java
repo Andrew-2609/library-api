@@ -55,10 +55,13 @@ public class BookServiceTest {
 
         Book savedBook = bookService.save(book);
 
+        savedBook.setLoans(Collections.emptyList());
+
         assertThat(savedBook.getId()).isNotNull().isEqualTo(1L);
         assertThat(savedBook.getTitle()).isEqualTo(book.getTitle());
         assertThat(savedBook.getAuthor()).isEqualTo(book.getAuthor());
         assertThat(savedBook.getIsbn()).isEqualTo(book.getIsbn());
+        assertThat(savedBook.getLoans()).isEqualTo(book.getLoans());
     }
 
     @Test
@@ -95,6 +98,7 @@ public class BookServiceTest {
         assertThat(foundedBook.get().getTitle()).isEqualTo(book.getTitle());
         assertThat(foundedBook.get().getAuthor()).isEqualTo(book.getAuthor());
         assertThat(foundedBook.get().getIsbn()).isEqualTo(book.getIsbn());
+        assertThat(foundedBook.get().getLoans()).isEqualTo(book.getLoans());
     }
 
     @Test
@@ -184,6 +188,7 @@ public class BookServiceTest {
         assertThat(finalBook.getTitle()).isEqualTo(updatingBook.getTitle());
         assertThat(finalBook.getAuthor()).isEqualTo(updatingBook.getAuthor());
         assertThat(finalBook.getIsbn()).isEqualTo(updatingBook.getIsbn());
+        assertThat(finalBook.getLoans()).isEqualTo(updatingBook.getLoans());
     }
 
     @Test

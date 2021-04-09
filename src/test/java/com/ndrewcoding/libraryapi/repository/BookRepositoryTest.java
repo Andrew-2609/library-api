@@ -11,6 +11,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import java.util.Collections;
 import java.util.Optional;
 
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
@@ -86,6 +87,6 @@ public class BookRepositoryTest {
     }
 
     protected static Book createNewBook(String isbn) {
-        return Book.builder().title("My Title").author("My Author").isbn(isbn).build();
+        return Book.builder().title("My Title").author("My Author").isbn(isbn).loans(Collections.emptyList()).build();
     }
 }
