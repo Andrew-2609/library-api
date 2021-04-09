@@ -4,8 +4,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ndrewcoding.libraryapi.api.dto.BookDTO;
 import com.ndrewcoding.libraryapi.api.exception.BusinessException;
 import com.ndrewcoding.libraryapi.api.model.entity.Book;
+import com.ndrewcoding.libraryapi.api.model.entity.Loan;
 import com.ndrewcoding.libraryapi.api.service.BookService;
 import com.ndrewcoding.libraryapi.api.service.LoanService;
+import com.ndrewcoding.libraryapi.api.service.LoanServiceTest;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -254,6 +256,35 @@ public class BookControllerTest {
 
         MockHttpServletRequestBuilder request = MockMvcRequestBuilders
                 .get(BOOK_API.concat(queryString))
+                .accept(MediaType.APPLICATION_JSON);
+
+        mvc.perform(request)
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("content", hasSize(1)))
+                .andExpect(jsonPath("pageable.pageNumber").value(0))
+                .andExpect(jsonPath("pageable.pageSize").value(100))
+                .andExpect(jsonPath("totalElements").value(1));
+    }
+
+    @Test
+    @DisplayName("Must return the Loans of a Book")
+    public void findLoansByBookTest() throws Exception {
+        long id = 1;
+
+        Book book = Book.builder().id(id).author("Author").title("Title").isbn("123").build();
+
+        Loan loan = LoanServiceTest.createValidLoan(book);
+
+        BDDMockito
+                .given(bookService.getById(Mockito.anyLong()))
+                .willReturn(Optional.of(book));
+
+        BDDMockito
+                .given(loanService.getLoansByBook(Mockito.any(Book.class), Mockito.any(Pageable.class)))
+                .willReturn(new PageImpl<>(Collections.singletonList(loan), PageRequest.of(0, 100), 1));
+
+        MockHttpServletRequestBuilder request = MockMvcRequestBuilders
+                .get(BOOK_API.concat("/" + id + "/loans?size=100"))
                 .accept(MediaType.APPLICATION_JSON);
 
         mvc.perform(request)
