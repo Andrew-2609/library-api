@@ -317,7 +317,7 @@ public class BookControllerTest {
         mvc.perform(request).andExpect(status().isNotFound());
     }
 
-    private BookDTO createNewBookDTO() {
-        return BookDTO.builder().title("Title").author("Author").isbn("001").build();
+    protected static BookDTO createNewBookDTO() {
+        return BookDTO.builder().id(1L).title("Title").author("Author").isbn("001").build();
     }
 }

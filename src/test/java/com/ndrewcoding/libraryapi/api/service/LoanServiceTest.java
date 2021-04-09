@@ -53,6 +53,7 @@ public class LoanServiceTest {
                 .id(1L)
                 .loanDate(LocalDate.now())
                 .customer("Andrew")
+                .customerEmail("andrew@email.com")
                 .book(book)
                 .build();
 
@@ -200,11 +201,26 @@ public class LoanServiceTest {
         assertThat(foundLoans.getContent()).isEqualTo(loansList);
         assertThat(foundLoans.getPageable().getPageNumber()).isEqualTo(0);
         assertThat(foundLoans.getPageable().getPageSize()).isEqualTo(pageSize);
+    }
 
+    @Test
+    @DisplayName("Must return empty when searching the Loans of a nonexistent Book")
+    public void finLoansByNonexistentBookTest() {
+        Book book = Book.builder().id(1L).build();
 
+        PageRequest pageRequest = PageRequest.of(0, 10);
+
+        Mockito
+                .when(loanRepository.findByBook(Mockito.any(Book.class), Mockito.any(PageRequest.class)))
+                .thenReturn(Page.empty());
+
+        Page<Loan> foundLoans = loanService.getLoansByBook(book, pageRequest);
+
+        assertThat(foundLoans.isEmpty()).isTrue();
     }
 
     public static Loan createValidLoan(Book book) {
-        return Loan.builder().book(book).customer("Andrew").loanDate(LocalDate.now()).build();
+        return Loan.builder().book(book).customer("Andrew").customerEmail("andrew@email.com")
+                .loanDate(LocalDate.now()).build();
     }
 }

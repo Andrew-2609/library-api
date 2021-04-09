@@ -1,6 +1,7 @@
 package com.ndrewcoding.libraryapi.api.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.ndrewcoding.libraryapi.api.dto.BookDTO;
 import com.ndrewcoding.libraryapi.api.dto.LoanDTO;
 import com.ndrewcoding.libraryapi.api.dto.LoanFilterDTO;
 import com.ndrewcoding.libraryapi.api.dto.ReturnedLoanDTO;
@@ -206,6 +207,7 @@ public class LoanControllerTest {
     }
 
     private LoanDTO createNewLoanDTO() {
-        return LoanDTO.builder().isbn("123").customer("Andrew").customerEmail("andrew@email.com").build();
+        BookDTO bookDTO = BookControllerTest.createNewBookDTO();
+        return LoanDTO.builder().id(1L).isbn("123").customer("Andrew").customerEmail("andrew@email.com").bookDTO(bookDTO).build();
     }
 }

@@ -101,7 +101,7 @@ public class LoanRepositoryTest {
     }
 
     private Loan createNewLoan(Book book) {
-        return Loan.builder().book(book).customer("Andrew").loanDate(LocalDate.now()).build();
+        return Loan.builder().book(book).customer("Andrew").customerEmail("andrew@email.com").loanDate(LocalDate.now()).build();
     }
 
     public Loan createAndPersistALoanAndItsBook() {
