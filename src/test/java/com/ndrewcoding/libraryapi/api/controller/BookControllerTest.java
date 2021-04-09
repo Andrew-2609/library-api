@@ -269,7 +269,7 @@ public class BookControllerTest {
     @Test
     @DisplayName("Must return the Loans of a Book")
     public void findLoansByBookTest() throws Exception {
-        long id = 1;
+        long id = 1L;
 
         Book book = Book.builder().id(id).author("Author").title("Title").isbn("123").build();
 
@@ -293,6 +293,28 @@ public class BookControllerTest {
                 .andExpect(jsonPath("pageable.pageNumber").value(0))
                 .andExpect(jsonPath("pageable.pageSize").value(100))
                 .andExpect(jsonPath("totalElements").value(1));
+    }
+
+    @Test
+    @DisplayName("Must return 404 when searching the Loans of a nonexistent Book")
+    public void findLoansByNonexistentBookTest() throws Exception{
+        long id = 1L;
+
+        Loan loan = Loan.builder().id(id).build();
+
+        BDDMockito
+                .given(bookService.getById(Mockito.anyLong()))
+                .willReturn(Optional.empty());
+
+        BDDMockito
+                .given(loanService.getLoansByBook(Mockito.any(Book.class), Mockito.any(Pageable.class)))
+                .willReturn(new PageImpl<>(Collections.singletonList(loan), PageRequest.of(0, 100), 0));
+
+        MockHttpServletRequestBuilder request = MockMvcRequestBuilders
+                .get(BOOK_API.concat("/" + id + "/loans?size=100"))
+                .accept(MediaType.APPLICATION_JSON);
+
+        mvc.perform(request).andExpect(status().isNotFound());
     }
 
     private BookDTO createNewBookDTO() {
