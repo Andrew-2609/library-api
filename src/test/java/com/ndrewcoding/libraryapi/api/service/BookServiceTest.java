@@ -152,6 +152,20 @@ public class BookServiceTest {
     }
 
     @Test
+    @DisplayName("Delete must throw IllegalArgumentException when given Book is null")
+    public void deleteNonexistentBookTest() {
+        Book book = Book.builder().id(1L).build();
+
+        Throwable exception = Assertions.catchThrowable(() -> bookService.delete(null));
+
+        assertThat(exception)
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("There is no Book with this ID.");
+
+        Mockito.verify(bookRepository, Mockito.never()).delete(book);
+    }
+
+    @Test
     @DisplayName("Must successfully update a Book with the given ID")
     public void updateBookTest() {
         long id = 1L;
@@ -178,6 +192,20 @@ public class BookServiceTest {
         Book book = Book.builder().build();
 
         Throwable exception = Assertions.catchThrowable(() -> bookService.update(book));
+
+        assertThat(exception)
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("There is no Book with this ID.");
+
+        Mockito.verify(bookRepository, Mockito.never()).save(book);
+    }
+
+    @Test
+    @DisplayName("Must throw IllegalArgumentException when updating a nonexistent Book")
+    public void updateNonexistentBookTest() {
+        Book book = Book.builder().id(1L).build();
+
+        Throwable exception = Assertions.catchThrowable(() -> bookService.update(null));
 
         assertThat(exception)
                 .isInstanceOf(IllegalArgumentException.class)
@@ -216,6 +244,6 @@ public class BookServiceTest {
     }
 
     protected static Book createValidBook() {
-        return Book.builder().title("My Book").author("My Author").isbn("001").build();
+        return Book.builder().title("My Book").author("My Author").isbn("001").loans(Collections.emptyList()).build();
     }
 }
