@@ -106,11 +106,7 @@ public class BookControllerTest {
 
         String json = new ObjectMapper().writeValueAsString(bookDTO);
 
-        MockHttpServletRequestBuilder request = MockMvcRequestBuilders
-                .post(BOOK_API)
-                .contentType(MediaType.APPLICATION_JSON)
-                .accept(MediaType.APPLICATION_JSON)
-                .content(json);
+        MockHttpServletRequestBuilder request = postBookRequestBuilder(json);
 
         mvc.perform(request)
                 .andExpect(status().isCreated())
@@ -125,11 +121,7 @@ public class BookControllerTest {
     public void createInvalidBookTest() throws Exception {
         String json = new ObjectMapper().writeValueAsString(new BookDTO());
 
-        MockHttpServletRequestBuilder request = MockMvcRequestBuilders
-                .post(BOOK_API)
-                .contentType(MediaType.APPLICATION_JSON)
-                .accept(MediaType.APPLICATION_JSON)
-                .content(json);
+        MockHttpServletRequestBuilder request = postBookRequestBuilder(json);
 
         mvc.perform(request)
                 .andExpect(status().isBadRequest())
@@ -149,11 +141,7 @@ public class BookControllerTest {
         BDDMockito.given(bookService.save(Mockito.any(Book.class)))
                 .willThrow(new BusinessException(existingIsbnErrorMessage));
 
-        MockHttpServletRequestBuilder request = MockMvcRequestBuilders
-                .post(BOOK_API)
-                .contentType(MediaType.APPLICATION_JSON)
-                .accept(MediaType.APPLICATION_JSON)
-                .content(json);
+        MockHttpServletRequestBuilder request = postBookRequestBuilder(json);
 
         mvc.perform(request)
                 .andExpect(status().isBadRequest())
@@ -176,11 +164,7 @@ public class BookControllerTest {
 
         BDDMockito.given(bookService.update(originalBook)).willReturn(updatedBook);
 
-        MockHttpServletRequestBuilder request = MockMvcRequestBuilders
-                .put(BOOK_API.concat("/" + id))
-                .contentType(MediaType.APPLICATION_JSON)
-                .accept(MediaType.APPLICATION_JSON)
-                .content(json);
+        MockHttpServletRequestBuilder request = putBookByIdRequestBuilder(id, json);
 
         mvc.perform(request)
                 .andExpect(status().isOk())
@@ -197,11 +181,7 @@ public class BookControllerTest {
 
         BDDMockito.given(bookService.getById(Mockito.anyLong())).willReturn(Optional.empty());
 
-        MockHttpServletRequestBuilder request = MockMvcRequestBuilders
-                .put(BOOK_API.concat("/" + 1L))
-                .contentType(MediaType.APPLICATION_JSON)
-                .accept(MediaType.APPLICATION_JSON)
-                .content(json);
+        MockHttpServletRequestBuilder request = putBookByIdRequestBuilder(1L, json);
 
         mvc.perform(request)
                 .andExpect(status().isNotFound());
@@ -297,7 +277,7 @@ public class BookControllerTest {
 
     @Test
     @DisplayName("Must return 404 when searching the Loans of a nonexistent Book")
-    public void findLoansByNonexistentBookTest() throws Exception{
+    public void findLoansByNonexistentBookTest() throws Exception {
         long id = 1L;
 
         Loan loan = Loan.builder().id(id).build();
@@ -319,5 +299,21 @@ public class BookControllerTest {
 
     protected static BookDTO createNewBookDTO() {
         return BookDTO.builder().id(1L).title("Title").author("Author").isbn("001").build();
+    }
+
+    private MockHttpServletRequestBuilder postBookRequestBuilder(String json) {
+        return MockMvcRequestBuilders
+                .post(BOOK_API)
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON)
+                .content(json);
+    }
+
+    private MockHttpServletRequestBuilder putBookByIdRequestBuilder(long id, String json) {
+        return MockMvcRequestBuilders
+                .put(BOOK_API.concat("/" + id))
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON)
+                .content(json);
     }
 }

@@ -222,7 +222,6 @@ public class BookServiceTest {
     @Test
     @DisplayName("Must filter Books by its properties")
     public void findBooksTest() {
-        //scenery
         Book book = createValidBook();
 
         int pageSize = 10;
@@ -238,10 +237,8 @@ public class BookServiceTest {
                         .findAll(ArgumentMatchers.any(), Mockito.any(PageRequest.class)))
                 .thenReturn(page);
 
-        //execution
         Page<Book> booksResult = bookService.find(book, pageRequest);
 
-        //verifications
         assertThat(booksResult.getTotalElements()).isEqualTo(1);
         assertThat(booksResult.getContent()).isEqualTo(booksList);
         assertThat(booksResult.getPageable().getPageNumber()).isEqualTo(0);

@@ -71,11 +71,7 @@ public class LoanControllerTest {
 
         BDDMockito.given(loanService.save(Mockito.any(Loan.class))).willReturn(loan);
 
-        MockHttpServletRequestBuilder request = MockMvcRequestBuilders
-                .post(LOAN_API)
-                .contentType(MediaType.APPLICATION_JSON)
-                .accept(MediaType.APPLICATION_JSON)
-                .content(json);
+        MockHttpServletRequestBuilder request = postLoanRequestBuilder(json);
 
         mvc.perform(request)
                 .andExpect(status().isCreated())
@@ -91,11 +87,7 @@ public class LoanControllerTest {
 
         BDDMockito.given(bookService.getByIsbn(Mockito.anyString())).willReturn(Optional.empty());
 
-        MockHttpServletRequestBuilder request = MockMvcRequestBuilders
-                .post(LOAN_API)
-                .contentType(MediaType.APPLICATION_JSON)
-                .accept(MediaType.APPLICATION_JSON)
-                .content(json);
+        MockHttpServletRequestBuilder request = postLoanRequestBuilder(json);
 
         mvc.perform(request)
                 .andExpect(status().isBadRequest())
@@ -118,11 +110,7 @@ public class LoanControllerTest {
                 .given(loanService.save(Mockito.any(Loan.class)))
                 .willThrow(new BusinessException("Book already loaned"));
 
-        MockHttpServletRequestBuilder request = MockMvcRequestBuilders
-                .post(LOAN_API)
-                .contentType(MediaType.APPLICATION_JSON)
-                .accept(MediaType.APPLICATION_JSON)
-                .content(json);
+        MockHttpServletRequestBuilder request = postLoanRequestBuilder(json);
 
         mvc.perform(request)
                 .andExpect(status().isBadRequest())
@@ -143,11 +131,7 @@ public class LoanControllerTest {
 
         BDDMockito.given(loanService.getById(id)).willReturn(Optional.of(loan));
 
-        MockHttpServletRequestBuilder request = MockMvcRequestBuilders
-                .patch(LOAN_API.concat("/" + id))
-                .contentType(MediaType.APPLICATION_JSON)
-                .accept(MediaType.APPLICATION_JSON)
-                .content(json);
+        MockHttpServletRequestBuilder request = patchLoanByIdRequestBuilder(id, json);
 
         mvc.perform(request)
                 .andExpect(status().isOk());
@@ -164,11 +148,7 @@ public class LoanControllerTest {
 
         BDDMockito.given(loanService.getById(Mockito.anyLong())).willReturn(Optional.empty());
 
-        MockHttpServletRequestBuilder request = MockMvcRequestBuilders
-                .patch(LOAN_API.concat("/1"))
-                .contentType(MediaType.APPLICATION_JSON)
-                .accept(MediaType.APPLICATION_JSON)
-                .content(json);
+        MockHttpServletRequestBuilder request = patchLoanByIdRequestBuilder(1L, json);
 
         mvc.perform(request)
                 .andExpect(status().isNotFound())
@@ -209,5 +189,21 @@ public class LoanControllerTest {
     private LoanDTO createNewLoanDTO() {
         BookDTO bookDTO = BookControllerTest.createNewBookDTO();
         return LoanDTO.builder().id(1L).isbn("123").customer("Andrew").customerEmail("andrew@email.com").bookDTO(bookDTO).build();
+    }
+
+    private MockHttpServletRequestBuilder postLoanRequestBuilder(String json) {
+        return MockMvcRequestBuilders
+                .post(LOAN_API)
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON)
+                .content(json);
+    }
+
+    private MockHttpServletRequestBuilder patchLoanByIdRequestBuilder(long id, String json) {
+        return MockMvcRequestBuilders
+                .patch(LOAN_API.concat("/" + id))
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON)
+                .content(json);
     }
 }
